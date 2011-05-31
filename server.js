@@ -3,9 +3,33 @@
  * Module dependencies.
  */
 
-var express = require('express');
+var express = require('express'),
+    cradle = require('cradle'),
+    config = require('./config');
 
 var app = module.exports = express.createServer();
+
+// Configure CouchDB
+
+    cradle.setup({ options: {cache: false, raw: true}});
+    var user_settings = {
+               host: config.settings.host,
+               port: config.settings.port,
+               user: config.settings.user,
+               pass: config.settings.pass,
+               testing_db: config.settings.testing_db,
+               db: config.settings.db
+                         };
+
+    var db = new(cradle.Connection)(
+        user_settings.host, 
+        user_settings.port, {
+            auth: {
+                username: user_settings.user,
+                password: user_settings.pass
+            }
+        }).database(user_settings.db);
+
 
 // Configuration
 
@@ -29,9 +53,17 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', function(req, res){
-  res.render('index', {
-    title: 'Express'
-  });
+    db.get('first', function(err, doc) {
+        if(err) console.log(err);
+        if(doc) {
+            res.render('index', {
+                title: doc.title,
+                author: doc.author,
+                body: doc.body,
+                rev: doc._rev
+            });
+        }
+    })
 });
 
 // Only listen on $ node app.js
