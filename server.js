@@ -11,7 +11,8 @@ var app = module.exports = express.createServer();
 
 // Configure CouchDB
 
-    cradle.setup({ options: {cache: false, raw: true}});
+    cradle.setup({cache: false, raw: true});
+    
     var user_settings = {
                host: config.settings.host,
                port: config.settings.port,
