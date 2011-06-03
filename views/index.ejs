@@ -1,13 +1,8 @@
 <div class="posts">
-    <h2><%= title %></h2>
-    <h4>Written by: <%= author %> on <%= date %></h4>
-    <p><%= body %></p>
-    <h6>Revision: <%= rev %></h6>
-    
-    <h3>Comments</h3>
-    <ul>
-        <% for(var i=0; i<comments.length; i++) {%>
-           <li><%= comments[i] %></li>
-        <% } %>
-        </ul>
+    <% for(var i=0; i<rows.length; i++) {%>
+    <h2><%= rows[i].title %></h2>
+    <h4>Written by: <%= rows[i].author %> on <%= rows[i].date %></h4>
+    <p><%= rows[i].body %></p>
+    <h6>Revision: <%= rows[i]._rev %></h6>
+    <% }%>
 </div>

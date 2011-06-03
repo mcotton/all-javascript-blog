@@ -54,10 +54,26 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', function(req, res){
-    db.get('first', function(err, doc) {
-        if(err) console.log(err);
+    db.view('blog/all', function(err, doc) {
+       
+        var results = []
+        //var i = require('util').inspect;
+        //console.log(i(doc));
+        doc.rows.forEach(function (row) {
+            results.push(row.value);
+        });
+        
+        res.render('index', {
+            rows: results
+        });
+    });
+});
+
+app.get('/post/:id', function(req, res){
+    db.get(req.params.id, function(err, doc) {
+        if(err) { console.log(err); res.end(); }
         if(doc) {
-            res.render('index', {
+            res.render('post', {
                 title: doc.title,
                 author: doc.author,
                 body: doc.body,
@@ -68,6 +84,7 @@ app.get('/', function(req, res){
         }
     })
 });
+
 
 // Only listen on $ node app.js
 
