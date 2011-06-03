@@ -61,7 +61,9 @@ app.get('/', function(req, res){
                 title: doc.title,
                 author: doc.author,
                 body: doc.body,
-                rev: doc._rev
+                rev: doc._rev,
+                comments: doc.comments,
+                date: doc.date
             });
         }
     })
