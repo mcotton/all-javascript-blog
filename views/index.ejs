@@ -1,8 +1,10 @@
 <div class="posts">
-    <% for(var i=0; i<rows.length; i++) {%>
+    <% for(var i=(rows.length - 1); i>=0; i--) {%>
     <h2><%= rows[i].title %></h2>
     <h4>Written by: <%= rows[i].author %> on <%= rows[i].date %></h4>
     <p><%= rows[i].body %></p>
     <h6>Revision: <%= rows[i]._rev %></h6>
+    <h5><a href='/post/<%= rows[i]._id %>'>View Comments</a></h5>
+    <br>
     <% }%>
 </div>

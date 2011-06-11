@@ -57,8 +57,6 @@ app.get('/', function(req, res){
     db.view('blog/all', function(err, doc) {
        
         var results = []
-        //var i = require('util').inspect;
-        //console.log(i(doc));
         doc.rows.forEach(function (row) {
             results.push(row.value);
         });
