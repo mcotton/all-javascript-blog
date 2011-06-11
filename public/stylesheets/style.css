@@ -10,3 +10,21 @@ a {
 .posts {
     width: 45%;
 }
+
+@media only screen and (max-width: 480px), only screen and (max-device-width:
+480px) {
+
+.posts {
+    width: 100%;
+}
+
+body {
+   margin: 0;
+   padding-top: 15px;
+   background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8),
+   to(#fff));
+   -webkit-text-stroke: 0.1px #fff;
+   -moz-text-stroke: 0.2px #fff;
+   color: #333; }
+
+
