@@ -20,7 +20,7 @@ a {
 
 body {
    margin: 0;
-   padding-top: 15px;
+   padding: 15px;
    background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8),
    to(#fff));
    -webkit-text-stroke: 0.1px #fff;
