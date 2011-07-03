@@ -40,7 +40,5 @@ body {
 
 
 #tagcloud {
-  position: relative;
-  height: 350px;
-  width: 350px;
+  display: none;
 }
