@@ -83,6 +83,17 @@ app.get('/post/:id', function(req, res){
     })
 });
 
+app.get('/tags', function(req, res){
+    db.view('blog/tags_count', {"group":"true"}, function(err, doc) {
+        if(err) { console.log(err); res.end(); }
+        if(doc) {
+            res.contentType('json');
+            res.send(doc);
+            console.log(doc);
+        }
+    })
+});
+
 
 // Only listen on $ node app.js
 
