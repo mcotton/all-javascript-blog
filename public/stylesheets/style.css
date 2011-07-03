@@ -16,6 +16,11 @@ a {
   text-decoration: none;
 }
 
+#tagcloud {
+  height: 350px;
+  width: 550px;
+}
+
 @media only screen and (max-width: 480px), only screen and (max-device-width:
 480px) {
 
@@ -33,3 +38,7 @@ body {
    color: #333; }
 
 
+#tagcloud {
+  height: 350px;
+  width: 350px;
+}

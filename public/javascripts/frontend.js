@@ -10,7 +10,7 @@ $(document).ready(function(){
     items.push({"text": data.rows[i].key, "weight": data.rows[i].value});
   });
 
-$("#example").jQCloud(items);
+$("#tagcloud").jQCloud(items);
     
 //  $('<table></table>', {
 //    'class': 'my-new-list',
