@@ -56,7 +56,7 @@ app.configure('production', function(){
 app.get('/', function(req, res){
     db.view('blog/all', function(err, doc) {
        
-        var results = []
+        var results = [];
         doc.rows.forEach(function (row) {
             results.push(row.value);
         });
@@ -80,7 +80,7 @@ app.get('/post/:id', function(req, res){
                 date: doc.date
             });
         }
-    })
+    });
 });
 
 app.get('/tags', function(req, res){
@@ -91,7 +91,7 @@ app.get('/tags', function(req, res){
             res.send(doc);
             console.log(doc);
         }
-    })
+    });
 });
 
 
