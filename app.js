@@ -54,7 +54,7 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', function(req, res){
-    db.view('blog/all', function(err, doc) {
+    db.view('blog/by_date', function(err, doc) {
        
         var results = [];
         doc.rows.forEach(function (row) {
@@ -68,7 +68,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/post/:id', function(req, res){
-    db.get(req.params.id, function(err, doc) {
+    db.get(req.params.id, {"revs": "true"}, function(err, doc) {
         if(err) { console.log(err); res.end(); }
         if(doc) {
             res.render('post', {
@@ -77,7 +77,31 @@ app.get('/post/:id', function(req, res){
                 body: doc.body,
                 rev: doc._rev,
                 comments: doc.comments,
-                date: doc.date
+                date: doc.date,
+                revisions: doc._revisions,
+                id: doc._id
+            });
+        }
+    });
+});
+
+app.get('/post/:id/:old_rev', function(req, res){
+    db.get(req.params.id, req.params.old_rev, function(err, doc) {
+        if(err) { 
+            // Couldn't find the older rev of this doc
+            console.log(err); 
+            res.redirect('/post/' + req.params.id); 
+            }
+        if(doc) {
+            res.render('post', {
+                title: doc.title,
+                author: doc.author,
+                body: doc.body,
+                rev: doc._rev,
+                comments: doc.comments,
+                date: doc.date,
+                revisions: undefined,
+                id: doc._id
             });
         }
     });
@@ -89,10 +113,13 @@ app.get('/tags', function(req, res){
         if(doc) {
             res.contentType('json');
             res.send(doc);
-            console.log(doc);
+            //console.log(doc);
         }
     });
 });
+
+
+
 
 
 // Only listen on $ node app.js
