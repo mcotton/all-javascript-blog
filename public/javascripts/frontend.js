@@ -10,15 +10,12 @@ $(document).ready(function(){
     items.push({"text": data.rows[i].key, "weight": data.rows[i].value});
   });
 
-$("#tagcloud").jQCloud(items);
+  $("#tagcloud").jQCloud(items);
+ 
+  });
     
-//  $('<table></table>', {
-//    'class': 'my-new-list',
-//    html: items.join('')
-//  }).appendTo('body');
-});
-
-
-
+  $('#add_post_button').click(function() {
+    $('#add_post').load('/add');
+  });
 
 });

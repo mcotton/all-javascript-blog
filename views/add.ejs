@@ -1,0 +1,70 @@
+<div id='info' style="width: 45%; background-color: yellow; height: 30px;"></div>
+<div class="posts">
+    <h2 id="preview_title">Title</h2>
+    <p id="html_body">Body</p>
+    <h6>Revision: 0</h6>
+
+</div>
+
+<br>
+
+<div id="new_form">
+
+    <script type="text/javascript" src="/javascripts/showdown.js"></script>
+    <script type="text/javascript"> 
+      $(function() {
+        var converter = new Showdown.converter();
+        $("#user_input").keyup(function(event){
+          var txt = $("#user_input").val();
+          var html = converter.makeHtml(txt);
+          $(".wikistyle").val(html);
+          $('#html_body').html(html);
+ 
+        });
+      });
+      
+      $(document).ready(function() {
+      	$('#html_preview').hide();
+      	$('#info').hide();
+      	
+      	$('#show_html').click(function(event) {
+            event.preventDefault();	
+            $('#html_preview').toggle();
+      	});
+      	
+      	$('#form_title').keydown(function(){
+            $('#preview_title').html($(this).val())
+      	});
+      	
+      	$('#post_it').click(function(){
+            $.post("/add", $("#comment_form").serialize(), function(data){
+                $('#info').html('post saved');
+                $('#info').slideDown(400);
+            });
+      	});
+      	
+      });
+    </script> 
+
+    <form id="comment_form" action="/add" method="post"> 
+		<h3>Post Something New</h3>
+				<p><input id="form_title" name="title" placeholder="Title" type="text" size="23"/></p>
+              <div id="entry-container"> 
+                <p>
+                <textarea id="user_input" placeholder="Enter Markdown" name="user_input" rows="10" cols="30">
+                </textarea>
+                
+                <!--
+                <h6><a href="#" id="show_html">toggle html preview</a></h6>
+                 -->
+                </p>
+              </div> 
+              <div id="html_preview">
+		      <p><textarea id="textbody" placeholder="HTML Preview" name="html_body" rows="10" cols="30" class="wikistyle">
+		      </textarea></p>
+		      </div>
+		    <br>
+		      <!-- Add Comment Button -->
+		      <input type="button" id="post_it" name="Publish" value="Publish">
+	</form> 
+</div>

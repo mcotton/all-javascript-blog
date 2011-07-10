@@ -52,7 +52,15 @@ app.configure('production', function(){
 });
 
 // Routes
+//  GET:    /
+//          /add
+//          /post/:id
+//          /post:id/:old_rev
+//          /tags
+//  POST:
+//          /add
 
+            
 app.get('/', function(req, res){
     db.view('blog/by_date', function(err, doc) {
        
@@ -65,6 +73,10 @@ app.get('/', function(req, res){
             rows: results
         });
     });
+});
+
+app.get('/add', function(req, res){
+    res.render('add', {});
 });
 
 app.get('/post/:id', function(req, res){
@@ -118,9 +130,34 @@ app.get('/tags', function(req, res){
     });
 });
 
+app.post('/add', function(req, res){
+    //console.log(req.body);
+    var new_doc = {
+        id: slugify(req.body.title),
+        title: req.body.title,
+        body: req.body.html_body,
+        markdown: req.body.user_input,
+        author: 'mcotton',
+        posted_on: Date(),
+        date: Date().substring(0,15)
+    };
+    
+    db.save(new_doc.id, new_doc, function(err, doc) {
+        if(err) { console.log(err); }
+        else {
+            console.log(doc);
+            res.send(doc);
+        }
+        
+    });
+});
 
-
-
+function slugify(text) {
+	text = text.replace(/[^-a-zA-Z0-9,&\s]+/ig, '');
+	text = text.replace(/-/gi, "_");
+	text = text.replace(/\s/gi, "-");
+	return text;
+}
 
 // Only listen on $ node app.js
 
