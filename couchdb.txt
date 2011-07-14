@@ -1,0 +1,17 @@
+{
+   "_id": "_design/blog",
+   "_rev": "7-de43f59694791c4e2d898248cc2b6b8e",
+   "language": "javascript",
+   "views": {
+       "all": {
+           "map": "function(doc) {\n  emit(doc.title,doc);\n}"
+       },
+       "tags_count": {
+           "map": "function(doc) {\n  for (var i=0;i<doc.tags.length;i++)  {\n    emit(doc.tags[i], 1);\n  }\n}",
+           "reduce": "function(keys, values, rereduce)  {\n   return sum(values);\n}"
+       },
+       "by_date": {
+           "map": "function(doc) {\n  emit([doc.posted_on, doc.title],doc);\n}"
+       }
+   }
+}
