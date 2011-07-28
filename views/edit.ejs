@@ -1,0 +1,26 @@
+<div class="posts">
+    <h2><div id="title"><%= title %></div></h2>
+    <h4>Written by: <%= author %> on <%= date %></h4>
+    <textarea id="content" cols="40" rows="20"><%- markdown %></textarea>
+    <br><input type="button" id="edit_submit" value="update">
+    <h6>Revision: <%= rev.substring(0, rev.indexOf('-')) %></h6>
+
+    <% if(revisions !== undefined)  {%>         
+    <h3>Revisions</h3>
+    <ul>
+        <% for(var i=0; i<revisions.ids.length; i++) {%>
+           <li><a href="<%= (revisions.start - i) + '-' + revisions.ids[i] %>"><%= revisions.start - i %></a></li>
+        <% } %>
+    </ul>
+    <% } %>
+    
+    
+    <% if(comments !== undefined)  { %>    
+    <h3>Comments</h3>
+    <ul>
+        <% for(var i=0; i<comments.length; i++) {%>
+           <li><%= comments[i] %></li>
+        <% } %>
+    <% } %>
+    </ul>
+</div>
