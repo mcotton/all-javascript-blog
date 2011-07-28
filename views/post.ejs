@@ -1,14 +1,14 @@
 <div class="posts">
-    <h2><%= title %></h2>
+    <h2><div id="title"><%= title %></div></h2>
     <h4>Written by: <%= author %> on <%= date %></h4>
-    <p><%- body %></p>
+    <div id="content"><%- body %></div>
     <h6>Revision: <%= rev.substring(0, rev.indexOf('-')) %></h6>
 
     <% if(revisions !== undefined)  {%>         
     <h3>Revisions</h3>
     <ul>
         <% for(var i=0; i<revisions.ids.length; i++) {%>
-           <li><a href="<%= id %>/<%= (revisions.start - i) + '-' + revisions.ids[i] %>"><%= revisions.start - i %></a></li>
+           <li><a href="Testing/<%= (revisions.start - i) + '-' + revisions.ids[i] %>"><%= revisions.start - i %></a></li>
         <% } %>
     </ul>
     <% } %>

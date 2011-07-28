@@ -55,10 +55,12 @@ app.configure('production', function(){
 //  GET:    /
 //          /add
 //          /post/:id
-//          /post:id/:old_rev
+//          /post/:id/:old_rev
+//          /edit/:id
 //          /tags
 //  POST:
 //          /add
+//          /post/:id/update
 
             
 app.get('/', function(req, res){
@@ -119,6 +121,25 @@ app.get('/post/:id/:old_rev', function(req, res){
     });
 });
 
+app.get('/edit/:id', function(req, res){
+    db.get(req.params.id, function(err, doc) {
+        if(err) {  console.log(err);  }
+        if(doc) {
+            res.render('edit', {
+                title: doc.title,
+                author: doc.author,
+                body: doc.body,
+                markdown: doc.markdown,
+                rev: doc._rev,
+                comments: doc.comments,
+                date: doc.date,
+                revisions: undefined,
+                id: doc._id
+            });
+        }
+    });
+});
+
 app.get('/tags', function(req, res){
     db.view('blog/tags_count', {"group":"true"}, function(err, doc) {
         if(err) { console.log(err); res.end(); }
@@ -151,6 +172,31 @@ app.post('/add', function(req, res){
         
     });
 });
+
+app.post('/post/:id/update', function(req, res){
+    console.log(req.body);
+    
+    db.get(req.params.id, function(err, newdoc) {
+        if(err) { console.log(err); res.end(); }
+        if(newdoc) {
+            newdoc.body = req.body.content;
+            
+            db.save(newdoc._id, newdoc, function(err, doc)  {
+                if(err) { console.log(err); }
+                else {
+                    console.log(doc);
+                    res.end();
+                }
+            });        
+        };
+    });
+
+});
+
+
+
+
+
 
 function slugify(text) {
 	text = text.replace(/[^-a-zA-Z0-9,&\s]+/ig, '');

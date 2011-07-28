@@ -32,7 +32,7 @@
             $('#html_preview').toggle();
       	});
       	
-      	$('#form_title').keydown(function(){
+      	$('#form_title').keyup(function(){
             $('#preview_title').html($(this).val())
       	});
       	
@@ -54,9 +54,9 @@
                 <textarea id="user_input" placeholder="Enter Markdown" name="user_input" rows="10" cols="30">
                 </textarea>
                 
-                <!--
+                
                 <h6><a href="#" id="show_html">toggle html preview</a></h6>
-                 -->
+                 
                 </p>
               </div> 
               <div id="html_preview">

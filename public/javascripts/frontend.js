@@ -15,7 +15,37 @@ $(document).ready(function(){
   });
     
   $('#add_post_button').click(function() {
+    // This is just loading the page that
+    // contains the form
     $('#add_post').load('/add');
+  });
+
+  // click to check-off list items
+  $("#content li").live({
+    click: function () { 
+      $(this).addClass("done");
+      var content = $('#content').html();
+      var title = $('#title').html();
+      //console.log(foo);
+      //alert(window.location.pathname + '/update');
+      $.post(window.location.pathname + '/update', { content: content })
+    },
+    
+    mouseover: function() {
+       $(this).addClass("hilite");
+    },
+    
+    mouseout: function() {
+      $(this).removeClass("hilite");
+    }
+
+  });
+
+  $("#edit_submit").click(function() {
+    //alert($('#content').val());
+    var content = $('#content').val();
+    $.post(window.location.pathname + '/update', { content: content });  
+  
   });
 
 });
