@@ -8,7 +8,7 @@
     <h3>Revisions</h3>
     <ul>
         <% for(var i=0; i<revisions.ids.length; i++) {%>
-           <li><a href="Testing/<%= (revisions.start - i) + '-' + revisions.ids[i] %>"><%= revisions.start - i %></a></li>
+           <li><a href="<%= id %>/<%= (revisions.start - i) + '-' + revisions.ids[i] %>"><%= revisions.start - i %></a></li>
         <% } %>
     </ul>
     <% } %>
