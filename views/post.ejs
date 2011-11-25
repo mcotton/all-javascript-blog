@@ -2,7 +2,8 @@
     <h2><div id="title"><%= title %></div></h2>
     <h4>Written by: <%= author %> on <%= date %></h4>
     <div id="content"><%- body %></div>
-    <h6>Revision: <%= rev.substring(0, rev.indexOf('-')) %></h6>
+    <h6>Revision: <%= rev.substring(0, rev.indexOf('-')) %>  || <a
+    href="/edit/<%= id %>">edit</a></h6>
 
     <% if(revisions !== undefined)  {%>         
     <h3>Revisions</h3>

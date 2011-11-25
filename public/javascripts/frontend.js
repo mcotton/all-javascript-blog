@@ -49,8 +49,9 @@ $(document).ready(function(){
 
   $("#edit_submit").click(function() {
     //alert($('#content').val());
+    //alert(window.location.pathname + '/update');
     var content = $('#content').val();
-    $.post(window.location.pathname + 'update', { content: content });  
+    $.post(window.location.pathname + '/update', { content: content });  
   
   });
 

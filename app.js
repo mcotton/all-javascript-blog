@@ -61,6 +61,7 @@ app.configure('production', function(){
 //  POST:
 //          /add
 //          /post/:id/update
+//          /edit/:id/update
 
             
 app.get('/', function(req, res){
@@ -174,7 +175,7 @@ app.post('/add', function(req, res){
 });
 
 app.post('/post/:id/update', function(req, res){
-    console.log(req.body);
+    //console.log(req.body);
     
     db.get(req.params.id, function(err, newdoc) {
         if(err) { console.log(err); res.end(); }
@@ -194,7 +195,24 @@ app.post('/post/:id/update', function(req, res){
 });
 
 
+app.post('/edit/:id/update', function(req, res){
+    //console.log(req.body);
 
+    db.get(req.params.id, function(err, newdoc)  {
+        if(err) { console.log(err); res.end(); }
+        if(newdoc) {
+            newdoc.body = req.body.content;
+
+            db.save(newdoc._id, newdoc, function(err, doc)  {
+                if(err) { console.log(err); }
+                else {
+                    console.log(doc);
+                    res.end();
+               }
+            });
+        };
+    });
+});
 
 
 
