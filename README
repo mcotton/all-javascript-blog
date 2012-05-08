@@ -5,3 +5,21 @@ http://mcottondesign3.appspot.com/post/ag5tY290dG9uZGVzaWduM3IMCxIEQmxvZxj57AkM
 
 Let me know on twitter if you have any comments
 @mcotton
+
+### NPM Modules ###
+
+ - Nodeunit
+ - Cradle
+ - Express
+ - Ejs
+
+
+### Setting up CouchDB ###
+
+ - Create a new db (default is named 'blog')
+ - Create a new temporary view (named _design/blog all)
+ - Save it
+ - Edit the design document, click the source tab paste in the view from
+   couch.txt
+ - You have to leave the id and rev the way it generated
+
